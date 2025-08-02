@@ -11,12 +11,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 
    });
-    
+builder.Services.AddCors();
+
+
 // // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 // builder.Services.AddOpenApi(); removed by me
 
 var app = builder.Build();
 
+app.UseCors(policy =>
+{
+    policy.AllowAnyHeader()
+          .AllowAnyMethod()
+          .WithOrigins("http://localhost:4200", "https://localhost:4200");
+});
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
