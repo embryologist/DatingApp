@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
+import { Nav } from "../layout/nav/nav";
+import { KENDO_INPUTS } from "@progress/kendo-angular-inputs";
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [Nav, KENDO_INPUTS],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

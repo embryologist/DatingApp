@@ -3,15 +3,17 @@ using System.Security.Cryptography;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Extentions;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AccountController(AppDbContext context) : BaseApiController
+public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
 {
     [HttpPost("register")] //api/account/register
-    public async Task<ActionResult<AppUser>> Register(RegisterDto registerDto)
+    public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
         if (await UserExists(registerDto.Email))
         {
@@ -29,10 +31,10 @@ public class AccountController(AppDbContext context) : BaseApiController
         context.Users.Add(user); // not using AddAsync, here we only make changes in memory, not call to the DB --- very Important, only used when pregenerate a number from DBs
         await context.SaveChangesAsync();
 
-        return user;
+        return user.ToDto(tokenService); // Convert AppUser to UserDto using the extension method
     }
     [HttpPost("login")] //api/account/login
-    public async Task<ActionResult<AppUser>> Login(LoginDto loginDto)
+    public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
         var user = await context.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
         if (user == null) return Unauthorized("Invalid email");
@@ -44,7 +46,7 @@ public class AccountController(AppDbContext context) : BaseApiController
             {
                 return Unauthorized("Invalid password");
             }
-            return user;
+             return user.ToDto(tokenService); // Convert AppUser to UserDto using the extension method
         }
         // Implementation for login will go here
         return Ok("Login functionality not implemented yet.");
@@ -53,5 +55,4 @@ public class AccountController(AppDbContext context) : BaseApiController
     {
         return await context.Users.AnyAsync(x => x.Email.ToLower() == email.ToLower());
     }
-
 }
