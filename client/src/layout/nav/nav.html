@@ -10,28 +10,36 @@
                 <h3 class="text-2xl font-semibold uppercase">Dating app</h3>
             </a>
         </div>
-
         <nav class="flex gap-3 my-2 uppercase text-lg text-white">
             <a>Matches</a>
             <a>Lists</a>
             <a>Messages</a>
         </nav>
         <div class="flex align-middle ml-auto gap-3">
+            @if(isLoggedIn()){
+            <div class="dropdown dropdown-end">
+                <label >
+                    <div tabindex="0" class="btn btn-ghost btn-circle avatar" class="w-10 rounded-full">
+                        <img src="https://api.dicebear.com/5.x/initials/svg?seed=Ahmad%20Abu%20Maizar&backgroundColor=ff0000" />
+                    </div>
+                </label>
+                <span class="text-white font-semibold">Ahmad</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5 text-white">
+                    <path
+                        d="M12 16.5a1.5 1.5 0 1 1 0-3 0 1.5 1.5 0 0 1 0 3zm0-12a9 9 0 1 1 0 18 9 9 0 0 1 0-18zm0 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12zm0-9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z" />
+                </svg>
+                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                    <li><a>Edit Profile</a></li>
+                    <li><a (click)="logout()">Log Out</a></li>
+                </ul>
+            </div>
+            } @else {
             <form #loginForm="ngForm" (ngSubmit)="login()" class="flex items-center gap-3">
-                <input 
-                [(ngModel)]="creds.email"
-                name="email" 
-                type="text" 
-                class="input" 
-                placeholder="Email">
-                <input 
-                [(ngModel)]="creds.password"
-                name="password" 
-                type="password" 
-                class="input" 
-                placeholder="Password">
+                <input [(ngModel)]="creds.email" name="email" type="text" class="input" placeholder="Email">
+                <input [(ngModel)]="creds.password" name="password" type="password" class="input"
+                    placeholder="Password">
                 <button class="btn" type="submit">Login</button>
-            </form>
+            </form> }
         </div>
     </div>
 </header>
