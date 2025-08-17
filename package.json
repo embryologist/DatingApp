@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@ngrx/effects": "^20.0.0",
-    "@ngrx/entity": "^20.0.0",
-    "@ngrx/router-store": "^20.0.0",
-    "@ngrx/store": "^20.0.0"
-  }
-}
