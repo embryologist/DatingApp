@@ -31,9 +31,6 @@
               }
             ],
             "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
               "src/styles.css"
             ],
             "polyfills": [
@@ -95,10 +92,6 @@
               }
             ],
             "styles": [
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
-              "src/styles.css"
             ],
             "polyfills": [
               "@angular/localize/init"
@@ -107,5 +100,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "cb808b66-3603-4721-bd3d-0c6a66e5fe76"
   }
 }
