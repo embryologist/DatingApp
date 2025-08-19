@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ServiceService } from '../../core/services/accounts/service.service';
+import { AccountService } from '../../core/services/accounts/account-service';
 
 @Component({
   selector: 'app-nav',
@@ -9,16 +9,17 @@ import { ServiceService } from '../../core/services/accounts/service.service';
   styleUrl: './nav.css'
 })
 export class Nav {
-  private accountsService = inject(ServiceService);
+
+  protected accountsService = inject(AccountService);
+
   protected creds: any = {}
-  protected isLoggedIn = signal(false); 
 
   login() {
     this.accountsService.login(this.creds).subscribe({
       next: (response) => {
         console.log('Login successful', response);
-        this.isLoggedIn.set(true);
         alert('Login successful! Welcome back.');
+        this.creds = {};
       },
       error: (error) => {
         console.error('Login failed', error);
@@ -28,6 +29,6 @@ export class Nav {
   }
 
   logout() {
-    this.isLoggedIn.set(false);
+    this.accountsService.logout();
   }
 }
