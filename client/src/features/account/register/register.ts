@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IRegisterCreds } from '../../../interfaces/user';
-import { AccountService } from '../../../core/services/accounts/account-service';
+import { AccountService } from '../../../core/services/accounts/account.service';
 
 @Component({
   selector: 'app-register',
