@@ -1,24 +1,20 @@
 import { Component, inject, Input, signal } from '@angular/core';
-import { AccountService } from '../../core/services/accounts/account.service';
-import { Register } from "../account/register/register";
+import { AccountService } from '../../core/services/account.service';
+import { Register } from '../account/register/register';
 import { IUser } from '../../interfaces/user';
 
 @Component({
   selector: 'app-home',
   imports: [Register],
   templateUrl: './home.html',
-  styleUrl: './home.css'
+  styleUrl: './home.css',
 })
 export class Home {
-
-  @Input({required: true }) membersFromApp: IUser[] = []; // one way data binding between parent and child
-
+  @Input({ required: true }) membersFromApp: IUser[] = []; // one way data binding between parent and child
   protected registerMode = signal(false);
-
   protected accountService = inject(AccountService);
 
-  showRegister(value: boolean){
+  showRegister(value: boolean) {
     this.registerMode.set(value);
   }
-
 }

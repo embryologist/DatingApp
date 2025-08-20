@@ -13,6 +13,10 @@
         "@schematics/angular:service": {
           "skipTests": true,
           "path": "src/core/services"
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true,
+          "path": "src/core/guards"
         }
       },
       "root": "",
@@ -30,12 +34,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "polyfills": [
-              "@angular/localize/init"
-            ]
+            "styles": ["src/styles.css"],
+            "polyfills": ["@angular/localize/init"]
           },
           "configurations": {
             "production": {
@@ -91,11 +91,8 @@
                 "input": "public"
               }
             ],
-            "styles": [
-            ],
-            "polyfills": [
-              "@angular/localize/init"
-            ]
+            "styles": [],
+            "polyfills": ["@angular/localize/init"]
           }
         }
       }

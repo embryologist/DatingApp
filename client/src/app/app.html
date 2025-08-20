@@ -1,3 +1,4 @@
 <app-nav />
-<!-- <h3 class="text-3xl text-red-500 font-black" al> {{title}}</h3> -->
-<app-home [membersFromApp]="members()" />
+<div [class.mt-24]="router.url !== '/'" [class.container]="router.url !== '/'" [class.mx-auto]="router.url !== '/'">
+  <router-outlet></router-outlet>
+</div>
