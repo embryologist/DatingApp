@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
+public class AccountController(AppDbContext context, ITokenService tokenService, ILogger<AccountController> logger) : BaseApiController
 {
     [HttpPost("register")] //api/account/register
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -30,7 +30,7 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
 
         context.Users.Add(user); // not using AddAsync, here we only make changes in memory, not call to the DB --- very Important, only used when pregenerate a number from DBs
         await context.SaveChangesAsync();
-
+        logger.LogInformation("User registered successfully.");
         return user.ToDto(tokenService); // Convert AppUser to UserDto using the extension method
     }
     [HttpPost("login")] //api/account/login
@@ -46,9 +46,10 @@ public class AccountController(AppDbContext context, ITokenService tokenService)
             {
                 return Unauthorized("Invalid password");
             }
-             return user.ToDto(tokenService); // Convert AppUser to UserDto using the extension method
+            return user.ToDto(tokenService); // Convert AppUser to UserDto using the extension method
         }
         // Implementation for login will go here
+        logger.LogInformation($"User {user.Email} logged in successfully.");
         return Ok("Login functionality not implemented yet.");
     }
     private async Task<bool> UserExists(string email)
