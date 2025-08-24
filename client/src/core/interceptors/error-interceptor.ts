@@ -1,11 +1,11 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
-import { inject as angularInject, inject, signal } from '@angular/core';
-import { ToastService } from '../services/toast.service';
+import { inject as angularInject, inject } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { NotificationService } from '../services/notification.service';
 
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
-  const toast = inject(ToastService);
+  const notify = inject(NotificationService);
   const router = inject(Router);
 
   return next(req).pipe(
@@ -22,11 +22,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
               }
               throw modelStateErrors.flat();
             } else {
-              toast.error(error.error + ' ' + error.status);
+              notify.show(error.error + ' ' + error.status, 'error');
             }
             break;
           case 401:
-            toast.error(error.error);
+            notify.show(error.error, 'error');
             break;
           case 404:
             router.navigateByUrl('/not-found');
@@ -39,7 +39,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             console.log(navigationExtras);
             break;
           default:
-            toast.error('Something went wrong');
+            notify.show('Something went wrong', 'error');
             break;
         }
       }
