@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { INotification } from '../../../interfaces/notification.interface';
 import { NotificationBody } from '../notification-body/notification-body';
 import { NotificationService } from '../../../core/services/notification.service';
@@ -11,27 +17,20 @@ import { Subscription } from 'rxjs';
   templateUrl: './notification-container.html',
   styleUrl: './notification-container.css',
 })
-export class NotificationContainer implements OnInit, OnDestroy {
+export class NotificationContainer implements OnInit {
   notifications: INotification[] = [];
-  private mySubscription: Subscription = new Subscription();
 
-  constructor(private notificationService: NotificationService) {}
+  private notificationService = inject(NotificationService);
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    this.mySubscription = this.notificationService.notifications$.subscribe(
-      (notifications) => {
-        this.notifications = notifications;
-      }
-    );
+    this.notificationService.notifications$.subscribe((notifications) => {
+      this.notifications = notifications;
+      this.cdr.detectChanges();
+    });
   }
 
   dismissNotification(id: number): void {
     this.notificationService.dismiss(id);
-  }
-
-  ngOnDestroy(): void {
-    if (this.mySubscription) {
-      this.mySubscription.unsubscribe();
-    }
   }
 }

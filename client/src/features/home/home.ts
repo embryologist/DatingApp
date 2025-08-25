@@ -20,6 +20,11 @@ export class Home {
     this.registerMode.set(value);
   }
   show() {
-    this.notificationService.show('Hello from Home Component!', 'info');
+    this.notificationService.show(
+      'info',
+      'WTH',
+      'Hello from Home Component!',
+      30000
+    );
   }
 }

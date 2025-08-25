@@ -22,11 +22,15 @@ export class Nav {
         console.log('Login successful', response);
         this.router.navigateByUrl('/members');
         this.creds = {};
-        this.notificationServicee.show('Login successful', 'success');
+        this.notificationServicee.show(
+          'success',
+          'Login Successful',
+          'Welcome back ' + response.displayName + '!'
+        );
       },
       error: (error) => {
         console.error('Login failed', error);
-        this.notificationServicee.show(error.error, 'error');
+        this.notificationServicee.show('error', 'Login Failed', error.error);
       },
     });
   }

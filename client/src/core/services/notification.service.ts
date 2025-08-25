@@ -15,14 +15,16 @@ export class NotificationService {
   }
 
   show(
+    type: 'success' | 'error' | 'warning' | 'info',
+    title: string,
     message: string,
-    type: 'success' | 'error' | 'info',
-    duration: number = 3000
+    duration: number = 30000
   ): void {
     const newNotification: INotification = {
       id: this.nextId++,
-      message,
       type,
+      title,
+      message,
     };
     this.notifications.push(newNotification);
     this.notificationSubject.next(this.notifications);

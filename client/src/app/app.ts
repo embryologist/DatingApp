@@ -15,6 +15,11 @@ export class App implements OnInit {
   protected notificationService = inject(NotificationService);
 
   ngOnInit() {
-    this.notificationService.show('Welcome to the app!', 'success', 5000);
+    this.notificationService.show(
+      'info',
+      'Welcome',
+      'Application loaded successfully!',
+      3000
+    );
   }
 }

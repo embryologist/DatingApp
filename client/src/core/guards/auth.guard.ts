@@ -5,11 +5,15 @@ import { NotificationService } from '../services/notification.service';
 
 export const authGuard: CanActivateFn = () => {
   const accountService = inject(AccountService);
-  const toastService = inject(NotificationService);
+  const notificationService = inject(NotificationService);
 
   if (accountService.currentUser()) return true;
   else {
-    toastService.show('You must be logged in to access this page', 'error');
+    notificationService.show(
+      'warning',
+      'Login Required',
+      'You must be logged in to access this page'
+    );
     return false;
   }
 };

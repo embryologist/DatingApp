@@ -22,11 +22,11 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
               }
               throw modelStateErrors.flat();
             } else {
-              notify.show(error.error + ' ' + error.status, 'error');
+              notify.show('error', error.status, error.error);
             }
             break;
           case 401:
-            notify.show(error.error, 'error');
+            notify.show('error', error.status, error.error);
             break;
           case 404:
             router.navigateByUrl('/not-found');
@@ -39,7 +39,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             console.log(navigationExtras);
             break;
           default:
-            notify.show('Something went wrong', 'error');
+            notify.show('error', 'Something went wrong', 'Unknown error');
             break;
         }
       }
