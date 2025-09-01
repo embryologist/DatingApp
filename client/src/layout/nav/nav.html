@@ -23,14 +23,27 @@
     <div class="flex align-middle ml-auto gap-3">
       @if(accountsService.currentUser(); as user){
       <div class="dropdown dropdown-end">
-        <label>
-          <div tabindex="0"
-            class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
-            <img src="https://api.dicebear.com/5.x/initials/svg?seed={{user?.displayName}}&backgroundColor=ff0000"
-              class="w-full h-auto transition-transform duration-300 group-hover:scale-110">
-          </div>
-        </label>
-        <!-- <span class="text-white font-semibold">{{user?.displayName}}</span> -->
+        <div tabindex="0"
+          class="group relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+          @if (!user.imageUrl) {
+          <label>
+            <div tabindex="0"
+              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              <img src="https://api.dicebear.com/5.x/initials/svg?seed={{user?.displayName}}&backgroundColor=ff0000"
+                class="w-full h-auto transition-transform duration-300 group-hover:scale-110">
+            </div>
+            <span class="text-white font-semibold p-4">{{user?.displayName}}</span>
+          </label>
+          } @else {
+          <label>
+            <div tabindex="0"
+              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              <img src={{user.imageUrl}} class="w-full h-auto transition-transform duration-300 group-hover:scale-110">
+            </div>
+            <span class="text-white font-semibold p-4 btn-ghost">{{user?.displayName}}</span>
+          </label>
+          }
+        </div>
         <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
           <li><a>Edit Profile</a></li>
           <li><a (click)="logout()">Log Out</a></li>
