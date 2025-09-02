@@ -6,10 +6,11 @@ namespace API.Controllers;
 public class RegisterDto
 {
     [Required]
-    public  string DisplayName { get; set; } = string.Empty;
+    public string DisplayName { get; set; } = string.Empty;
     [Required]
-     [EmailAddress]
+    [EmailAddress]
     public string Email { get; set; } = string.Empty;
-     [Required]
+    [Required]
     public string Password { get; set; } = string.Empty;
+    public string? ImageUrl { get; set; }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { ILoginCreds, IRegisterCreds, IUser } from '../../interfaces/user';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,8 @@ import { ILoginCreds, IRegisterCreds, IUser } from '../../interfaces/user';
 export class AccountService {
   private http = inject(HttpClient);
   currentUser = signal<IUser | null>(null); // | is called union
-  baseUrl = 'https://localhost:5001/api/'; // Replace with your actual API base URL
+  //baseUrl = 'https://localhost:5001/api/'; // Replace with your actual API base URL
+  private baseUrl = environment.apiUrl;
 
   register(creds: IRegisterCreds) {
     return this.http.post<IUser>(this.baseUrl + 'account/register', creds).pipe(

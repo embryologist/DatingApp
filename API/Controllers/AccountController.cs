@@ -24,6 +24,7 @@ public class AccountController(AppDbContext context, ITokenService tokenService,
         {
             DisplayName = registerDto.DisplayName,
             Email = registerDto.Email,
+            ImageUrl = registerDto.ImageUrl,
             PasswordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key
         };

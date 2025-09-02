@@ -38,4 +38,8 @@ export class NotificationService {
       this.notificationSubject.next(this.notifications);
     }
   }
+  destroy(): void {
+    this.notifications = [];
+    this.notificationSubject.next(this.notifications);
+  }
 }

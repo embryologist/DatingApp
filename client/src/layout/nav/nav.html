@@ -24,20 +24,20 @@
       @if(accountsService.currentUser(); as user){
       <div class="dropdown dropdown-end">
         <div tabindex="0"
-          class="group relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+          class="group relative overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
           @if (!user.imageUrl) {
-          <label>
+          <label class=" cursor-pointer">
             <div tabindex="0"
-              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
               <img src="https://api.dicebear.com/5.x/initials/svg?seed={{user?.displayName}}&backgroundColor=ff0000"
                 class="w-full h-auto transition-transform duration-300 group-hover:scale-110">
             </div>
             <span class="text-white font-semibold p-4">{{user?.displayName}}</span>
           </label>
           } @else {
-          <label>
+          <label class=" cursor-pointer">
             <div tabindex="0"
-              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl cursor-pointer">
+              class="group relative btn btn-ghost btn-circle avatar overflow-hidden transition-transform duration-300 hover:scale-105 hover:shadow-xl">
               <img src={{user.imageUrl}} class="w-full h-auto transition-transform duration-300 group-hover:scale-110">
             </div>
             <span class="text-white font-semibold p-4 btn-ghost">{{user?.displayName}}</span>

@@ -37,6 +37,7 @@ export class Nav {
 
   logout() {
     this.accountsService.logout();
+    this.notificationServicee.destroy();
     this.router.navigateByUrl('/');
   }
 }
